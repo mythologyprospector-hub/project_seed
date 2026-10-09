@@ -532,7 +532,7 @@ Connected implementation tools must be treated according to their demonstrated c
 - The owner runs the local-only test when appropriate and returns its output. Interpret that evidence, diagnose failures, and continue driving the work; do not make the owner become the implementation coordinator.
 - If a genuine tool boundary prevents execution, state exactly what the available tools can and cannot do, complete the work that remains possible, and leave a precise handoff. Never disguise a capability boundary as completed work.
 
-### ## Terminal command presentation and copy/paste safety
+### Terminal command presentation and copy/paste safety
 
 When giving the owner commands to run in a terminal, use a **regular, full-size Markdown fenced code block**. Do not use compact one-line command bars, horizontally scrolling command widgets, or other presentation formats whose copied clipboard text may include formatting markers.
 
