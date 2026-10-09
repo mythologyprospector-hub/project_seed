@@ -270,6 +270,22 @@ Do not rely on ChatGPT conversation memory as the project's source of truth.
 
 For Organs integration, the current installed Organs repository is the technical source of truth for Organs itself. The Seed provides only the stable integration rule; it must not become a stale copy of Organs implementation details.
 
+## Default licensing — MIT, free code for the masses
+
+**Default to the MIT License for projects created under this Seed.** The goal is to make our code broadly usable, modifiable, shareable, and commercially usable by ordinary people and organizations alike.
+
+For each new software repository we control:
+
+- include a standard `LICENSE` file containing the MIT License, with the correct copyright holder and year;
+- make the repository's license status clear in its README or other canonical project documentation when useful;
+- preserve third-party copyright notices, license texts, attribution, and other obligations;
+- inspect dependencies, bundled assets, generated material, and contributions before claiming the entire repository is covered by MIT;
+- do not add custom ethical-use restrictions to the MIT license. Keep our moral compass in our project charter and conduct, not as a hidden rewrite of the license.
+
+Apply this default to existing projects we control when we are authorized to change their licensing and have checked that we have the rights to do so. **Do not silently relicense other people's work, erase existing grants, or assume that changing a license file retroactively withdraws permissions already granted.** If ownership, contributor rights, or third-party terms create a real uncertainty, preserve the evidence and raise that specific issue instead of guessing.
+
+MIT is our default because we want the code to be free to use—not because we expect every user to behave well. We will earn trust by building useful things and may earn income from services, support, hosting, integration, and other honest value around the code, without making ordinary access to the code itself a tollbooth.
+
 ## 7. Inspect before modifying
 
 Never guess when the repository can tell us.
