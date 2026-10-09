@@ -276,7 +276,7 @@ For Organs integration, the current installed Organs repository is the technical
 
 For each new software repository we control:
 
-- include a standard `LICENSE` file containing the MIT License, with the correct copyright holder and year;
+- include a standard `LICENSE` file containing the MIT License, using the owner's chosen copyright attribution: **James Earl Stambaugh III**, GitHub: `https://github.com/mythologyprospector-hub`, email: `mythologyprospector@gmail.com`, with the correct year. Use these details for projects the owner controls unless the owner specifies a different rights holder or the repository's ownership/contributor history requires a different attribution;
 - make the repository's license status clear in its README or other canonical project documentation when useful;
 - preserve third-party copyright notices, license texts, attribution, and other obligations;
 - inspect dependencies, bundled assets, generated material, and contributions before claiming the entire repository is covered by MIT;
