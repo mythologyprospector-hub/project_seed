@@ -339,6 +339,22 @@ A smaller result falsely presented as the original goal is failure.
 10. Report briefly.
 11. Continue when approved.
 
+## Testing and remote verification default
+
+**Prefer remote CI for ordinary automated tests.** For a software repository hosted on GitHub, use GitHub Actions as the normal place to run automated tests and checks. For a Python project that uses pytest, the expected default is a suitable Actions workflow that installs the project's declared dependencies and runs its relevant pytest suite.
+
+This is a **generic operating rule, not a universal prebuilt workflow**. The correct workflow depends on the repository's language, dependency manager, supported versions, services, secrets, test commands, and existing CI setup. When arriving in a project, inspect what already exists. Reuse and improve its established `work.yml`, testing workflow, or other canonical CI mechanism where appropriate. If the project needs CI and has none, the builder should create and verify a project-appropriate workflow as part of establishing the project—not assume that Project Seed itself magically supplies one, and not create competing workflows without a reason.
+
+Run tests on Bucky (the local machine) only when there is a concrete reason, such as:
+- Git/network/checkout trouble prevents reliable remote execution;
+- the behavior depends on local hardware, devices, installed services, filesystem state, or another genuinely local condition;
+- the task specifically requires a local integration or environment check that CI cannot faithfully reproduce;
+- a focused local diagnostic is the most practical way to understand or repair a CI failure.
+
+Do not routinely use Bucky as the default test runner merely out of habit. Prefer Actions for repeatable automated verification, while recognizing that local-only behavior may require local testing. When local testing is necessary, record why it was needed and distinguish its result from remote CI status.
+
+Inspect the workflow result itself. A workflow file existing, a run being queued, or a local test passing does not prove that GitHub Actions passed. Never claim remote verification without a completed, relevant run and its actual result.
+
 Use the repository's established verification system. If `work.yml`, GitHub Actions, or another project-specific inspection layer exists, use it.
 
 Do not claim success until the relevant evidence exists.
