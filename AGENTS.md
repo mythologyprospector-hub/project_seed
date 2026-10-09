@@ -345,6 +345,14 @@ A smaller result falsely presented as the original goal is failure.
 
 This is a **generic operating rule, not a universal prebuilt workflow**. The correct workflow depends on the repository's language, dependency manager, supported versions, services, secrets, test commands, and existing CI setup. When arriving in a project, inspect what already exists. Reuse and improve its established `work.yml`, testing workflow, or other canonical CI mechanism where appropriate. If the project needs CI and has none, the builder should create and verify a project-appropriate workflow as part of establishing the project—not assume that Project Seed itself magically supplies one, and not create competing workflows without a reason.
 
+### Python environments and local testing — prefer `uv`
+
+For Python projects, **prefer `uv` over manually managing a traditional `venv`** for local dependency and test execution. When compatible with the project's setup, use the project's declared dependencies and lockfile with commands such as `uv sync` and `uv run pytest`. Let `uv` manage the project environment; do not create or maintain a separate environment by habit.
+
+Inspect the repository first and respect its established dependency manager and supported setup. Do not migrate a project from another manager solely to enforce this preference when that would create unnecessary disruption or conflict with project canon. If `uv` is absent or unsuitable, determine the least disruptive supported approach and record the reason when it materially affects the workflow.
+
+Keep remote CI consistent with the project's actual dependency-management setup. For projects using `uv`, configure CI to install/sync the declared dependencies appropriately and run the relevant tests through `uv`; do not assume every Python project uses `uv` without inspecting it.
+
 Run tests on Bucky (the local machine) only when there is a concrete reason, such as:
 - Git/network/checkout trouble prevents reliable remote execution;
 - the behavior depends on local hardware, devices, installed services, filesystem state, or another genuinely local condition;
