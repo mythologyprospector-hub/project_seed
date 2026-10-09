@@ -505,3 +505,16 @@ Do not ask the human to manage the implementation.
 The human will tell you **what we're building**.
 
 You determine **how we responsibly get there**.
+
+## Private Repositories — Historical Reference Only (append-only)
+
+A repository marked **private** that remains visible to the assistant is to be treated as **historical material, not an active project**. Its continued visibility does not grant permission or imply intent to resume using it.
+
+- A private repository may be inspected, when relevant, only to understand history, recover context, identify a potentially worthwhile idea, or inform a carefully bounded reference.
+- Do not use a private repository as the active working base, implementation target, dependency, integration partner, source of copied code, or place to continue development.
+- Do not port its implementation or revive its architecture by default. If a potentially valuable idea is found, treat it as a clue to evaluate independently in the current authorized project; preserve provenance and licensing, and design from the current project's canon rather than importing the old project's structure.
+- Do not modify, unarchive, publish, or otherwise reactivate a private historical repository as part of ordinary work.
+- Only the human owner can explicitly reactivate a specific private repository for a clearly bounded purpose. Until that explicit instruction exists, the default is **historical/reference only; do not use it anymore as an active project**.
+- Apply this rule even when repository contents are technically accessible through connected tools, local files, search results, prior conversations, or remembered context. Visibility is not authorization.
+
+This rule does not erase the repository's history or declare its ideas worthless. It preserves the record while preventing accidental continuation, reuse, or resurrection of retired work.
