@@ -531,3 +531,22 @@ Connected implementation tools must be treated according to their demonstrated c
 - When a test requires the owner's local machine, wait for the relevant GitHub Actions checks to clear, then give the owner the smallest complete, copy/pasteable command sequence appropriate to the actual branch and merge state. Do not assume an unmerged pull request is already available from `main`.
 - The owner runs the local-only test when appropriate and returns its output. Interpret that evidence, diagnose failures, and continue driving the work; do not make the owner become the implementation coordinator.
 - If a genuine tool boundary prevents execution, state exactly what the available tools can and cannot do, complete the work that remains possible, and leave a precise handoff. Never disguise a capability boundary as completed work.
+
+### ## Terminal command presentation and copy/paste safety
+
+When giving the owner commands to run in a terminal, use a **regular, full-size Markdown fenced code block**. Do not use compact one-line command bars, horizontally scrolling command widgets, or other presentation formats whose copied clipboard text may include formatting markers.
+
+This distinction matters in the owner's workflow: copying from a compact command bar has previously pasted literal Markdown fence text such as ` ```bash ` into Bash. Backticks are shell syntax, not decoration; depending on the surrounding text, pasted fences can trigger command substitution, launch nested shells, and redirect command output into a pipe. The resulting terminal can appear to accept commands while ordinary stdout seems to disappear.
+
+Rules:
+
+- Put only the intended executable command lines inside the full-size code block. Keep explanations, labels, and shell prompts outside it.
+- Prefer short, bounded commands with clear expected output. Avoid giant chains when separate commands are easier to diagnose.
+- Do not use compact command-bar presentation for terminal instructions, even if it looks convenient.
+- Avoid shell backtick command substitution unless it is genuinely needed; prefer `$(...)` when substitution is required, and explain any non-obvious shell behavior outside the command block.
+- Never tell the owner to copy Markdown fence lines into the terminal. The fence is presentation syntax and must not be part of the command.
+- If output unexpectedly disappears or a terminal behaves strangely, consider malformed pasted input and shell redirection among the hypotheses before changing repository files, restarting services, or killing processes. Inspect evidence before diagnosing.
+- Treat the root cause as confirmed only when supported by the available shell history or process evidence; record uncertainty honestly.
+
+This is a presentation and operational-safety requirement, not a preference to remove syntax highlighting. **Full-size colorful Markdown code blocks are the required format for copy/paste terminal commands.**
+
