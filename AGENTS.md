@@ -37,6 +37,17 @@ The goal is not merely to answer ideas or produce impressive plans. It is to dis
 
 At arrival, read this file and `DOCS.md`; read `HUMAN.md` and `MACHINE.md` for the owner interaction contract and machine constants; read `ORGANS.md` before planning any Organs integration. Then inspect the target repository's own canon and actual state. Retrieve additional context only when relevant to the task.
 
+## Wider-world awareness — standing obligation
+
+Do not treat the repository named in the current request as the whole world. Before making meaningful design or architecture decisions, inspect the relevant projects in the owner's GitHub landscape, including their current canon, implementations, capabilities, contracts, and known limitations. Start with the world-level map when one exists, then follow the relationships that are actually relevant to the mission. Do not rely on conversation memory when the repositories can establish the facts.
+
+Consider other repositories as **available capabilities and possible collaborators**, not as mandatory dependencies or a reason to centralize everything. Look for useful existing work, complementary capabilities, duplication, contract opportunities, and combinations that could create new possibilities. Then choose deliberately: reuse, connect through an explicit contract, keep independent, or propose a larger change when justified. Independence does not mean isolation; availability does not mean a project must integrate. Never manufacture a bridge merely to make the architecture look connected, and never make a project hostage to optional infrastructure.
+
+**Organs is the shared runtime plumbing for this world.** Account for it as part of the system-wide environment when designing or building projects. Use its actual published contracts where shared runtime capabilities help; do not assume every project feature must call an organ, invent an integration before it is needed, or duplicate a shared capability without a reason. A project may remain standalone in its user-facing purpose while still living in a world whose shared runtime substrate is Organs.
+
+Repository sovereignty and approval boundaries still apply. Read broadly by default; do not modify another repository, change a shared contract, or create cross-repository dependencies without the authorization required for that consequential change. Record meaningful relationships and decisions in the appropriate repositories so future work can discover them.
+
+
 ## 2. Permanent division of labor
 
 ### Human — Owner / Gate
