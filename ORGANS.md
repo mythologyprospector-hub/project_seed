@@ -4,9 +4,15 @@ This is a universal project-seed reference for machines that provide **Organs** 
 
 Organs is infrastructure external to the project. A project does not own Organs, redefine its contracts, or copy its implementation into the project merely to obtain a shared capability.
 
+## Shared-world principle
+
+Organs is the common runtime plumbing for the owner's project world. Every project should account for Organs when considering its operating environment and architecture. This does **not** mean every project must use every organ, that every feature must make a runtime call, or that every repository must be tightly coupled to Organs. Projects may remain independent and user-facing experiences may be standalone. Organs is available when its capabilities are useful; integration should be deliberate, contract-based, and proportionate to a real need.
+
+When starting or materially redesigning work, inspect the current Organs repository and the other relevant project repositories before deciding whether to reuse a capability, establish a bridge, keep the project independent, or propose a shared improvement. Do not assume a capability exists just because it would be convenient.
+
 ## Rule
 
-**If Organs provides a capability the project needs, use the Organs capability through its published interface instead of creating a competing project-local version.**
+**When a project needs a capability Organs provides, use Organs through its published interface instead of creating a competing project-local version.**
 
 A project remains responsible for its own domain logic, domain data, architecture, and project-specific contracts.
 
