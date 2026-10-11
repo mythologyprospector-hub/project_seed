@@ -12,7 +12,7 @@ The human prefers:
 
 - plain language;
 - short explanations;
-- complete copy/paste command sequences when commands are needed;
+- complete copy/paste command sequences when commands are needed;\n- When terminal commands are needed, present them in a regular, full-size Markdown fenced code block with a language tag (for example, ```bash). Never use compact command bars or a presentation that could copy fence markers into the terminal.
 - full paths when paths matter;
 - safe and reversible changes;
 - minimal jargon;
