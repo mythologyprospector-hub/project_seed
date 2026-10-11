@@ -561,3 +561,22 @@ Rules:
 
 This is a presentation and operational-safety requirement, not a preference to remove syntax highlighting. **Full-size colorful Markdown code blocks are the required format for copy/paste terminal commands.**
 
+
+## Workspace isolation and worktree hygiene
+
+The owner's everyday checkout is the stable project location declared by the owner (on Bucky, `~/projects/<repo>`). Keep that checkout predictable and do not turn it into a rotating pile of task branches or temporary workspaces.
+
+- Prefer the established repository checkout for ordinary work. Use Git worktrees only when parallel work, isolated review, or a specific tool workflow genuinely benefits from them; worktrees are optional, not a default requirement.
+- Put any temporary or review worktrees under one dedicated, per-repository worktree home beneath the projects root, such as `~/projects/.worktrees/<repo>/`. Do not create sibling folders such as `~/projects/<repo>-issue-37` or `<repo>-review-3` directly in the projects root.
+- Keep the everyday checkout on the repository's normal default branch when practical. Do implementation and review work on a named branch or in a dedicated worktree rather than unexpectedly leaving the owner's canonical checkout on a task branch.
+- Before creating worktrees, inspect the current branch, worktree list, working-tree changes, and destination paths. Use Git's `git worktree` commands to add, list, move, and remove registered worktrees; never relocate registered worktrees with ordinary filesystem moves.
+- Name worktrees clearly, record what task/branch each serves, and reuse an existing suitable worktree rather than multiplying near-duplicates.
+- Do not delete a worktree or its files merely to tidy up. Inspect for unique commits, uncommitted or untracked files, and useful evidence first; preserve anything uncertain until it is understood.
+- If worktrees have already spilled into the projects root, propose or perform a careful Git-aware relocation into the dedicated worktree home, preserving each worktree and its state. Do not reset, force-push, or rewrite branch history as a cleanup shortcut.
+- The assistant owns the coordination and cleanup plan. Do not make the human manually manage branches, run routine tests, or arbitrate ordinary workspace housekeeping.
+
+## Verification ownership
+
+Use the repository's GitHub Actions workflow as the normal test gate whenever it can verify the change. Inspect the actual workflow run and result; do not ask the owner to run the full test suite locally just because an implementation tool prefers that route.
+
+Run or request local commands only when local state or a local-only integration is genuinely required. Explain why, provide the smallest necessary command sequence, and distinguish local evidence from remote CI evidence.
