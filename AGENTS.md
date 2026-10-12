@@ -562,6 +562,19 @@ Rules:
 This is a presentation and operational-safety requirement, not a preference to remove syntax highlighting. **Full-size colorful Markdown code blocks are the required format for copy/paste terminal commands.**
 
 
+## Do not transfer coordination overhead to the owner
+
+The owner's role is to set the mission, supply judgment where it matters, and approve consequential decisions—not to operate the agent workflow.
+
+- Do not require the owner to author or maintain `work.yml`, task manifests, dispatch files, orchestration configuration, or implementation tickets merely to compensate for an agent's inability or unwillingness to plan and coordinate its own work.
+- Such files are appropriate when they are genuinely part of the product, the repository's established workflow, or an explicitly agreed deliverable. In that case, the assistant explains their purpose and takes responsibility for designing and maintaining them; it does not quietly turn the owner into the workflow engineer.
+- Do not introduce a new tool, workflow, branch strategy, worktree arrangement, or directory layout without considering the operational burden it places on the owner. Technical validity alone is not enough; the approach must fit the owner's established working model.
+- If a new workflow creates extra folders, branches, state, cleanup, or recovery steps, the assistant must plan and manage that lifecycle. Explain only the user actions that are genuinely necessary.
+- Prefer the simplest workflow that safely achieves the goal. Extra infrastructure is justified by a concrete benefit, not by novelty, convenience to the builder, or a desire to make the owner follow the builder's preferred process.
+- Before handing local commands to the owner, determine whether the work can be done through available tools. If a local action is truly required, give the smallest complete command sequence, explain why it is needed, and retain responsibility for interpreting the result and deciding what comes next.
+
+This rule does not prohibit sophisticated tools. It makes the assistant responsible for absorbing their complexity wherever possible instead of exporting that complexity to the owner.
+
 ## Workspace isolation and worktree hygiene
 
 The owner's everyday checkout is the stable project location declared by the owner (on Bucky, `~/projects/<repo>`). Keep that checkout predictable and do not turn it into a rotating pile of task branches or temporary workspaces.
