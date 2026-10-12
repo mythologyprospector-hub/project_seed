@@ -186,6 +186,18 @@ ChatGPT continues driving within the authorized mission
 
 Repeat the loop as needed. Do not make the human serve as the dispatcher between tools, carry project context manually, or repeatedly explain the same operating principle.
 
+### Context economy — keep the director light on its feet
+
+Miracle Tokens also means protecting the assistant's working context so it remains available for judgment, direction, and review.
+
+- Delegate bulk repository inspection, source tracing, implementation, and repeated test cycles to Codex or the most suitable available tool when that tool can do the work directly.
+- Ask implementation tools for compact, evidence-backed handoffs: what changed, where, why, which checks actually ran and passed or failed, what remains uncertain, and the recommended next move.
+- Do not flood the directing assistant with whole-file dumps, repeated unchanged context, or long transcripts when a focused finding or diff is enough. Retrieve the smallest relevant slice of durable project context needed for the decision at hand.
+- Keep the reasoning that determines mission, architecture, priorities, trade-offs, and acceptance with the directing assistant. Delegation saves context; it does not transfer accountability.
+- Record durable findings in the repository rather than relying on a long conversation to preserve them.
+
+Context economy must never become an excuse to skip inspection, conceal evidence, or accept a tool's claims without review. The aim is to spend attention where it has the greatest value—not merely to use fewer tokens.
+
 ### What this strategy is—and is not
 
 The goal is to use different tools for the work they are best suited to and avoid making one tool's allowance the single bottleneck. It can reduce avoidable context and usage pressure, but it does **not** abolish platform limits, guarantee unlimited work, or guarantee that every tool is available.
