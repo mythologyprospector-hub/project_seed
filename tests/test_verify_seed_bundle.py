@@ -1,4 +1,4 @@
-""""Regression tests for the Project Seed structural verifier."""
+"""Regression tests for the Project Seed structural verifier."""
 from __future__ import annotations
 
 import tempfile
@@ -12,20 +12,20 @@ class VerifySeedBundleTests(unittest.TestCase):
     def make_source(self, root: Path) -> None:
         for name in ROOT_FILES + ("WORKTREE_LIFECYCLE.md", "SEED_SYNC.md"):
             (root / name).write_text(
-                "\\n".join(ROOT_FILES) if name == "README.md" else "seed content",
+                "\n".join(ROOT_FILES) if name == "README.md" else "seed content",
                 encoding="utf-8",
             )
         (root / "HUMAN.md").write_text(
-            "regular, full-size Markdown fenced code block\\n"
-            "Never use compact command bars\\n",
+            "regular, full-size Markdown fenced code block\n"
+            "Never use compact command bars\n",
             encoding="utf-8",
         )
         workflow = root / ".github" / "workflows" / "project-seed-sync.yml"
         workflow.parent.mkdir(parents=True)
         workflow.write_text(
-            "for file in " + " ".join(SNAPSHOT_FILES) + "; do\\n"
-            '  cp "seed/$file" "target/.project_seed/seed/$file"\\n'
-            "done\\n",
+            "for file in " + " ".join(SNAPSHOT_FILES) + "; do\n"
+            '  cp "seed/$file" "target/.project_seed/seed/$file"\n'
+            "done\n",
             encoding="utf-8",
         )
 
@@ -41,9 +41,9 @@ class VerifySeedBundleTests(unittest.TestCase):
             self.make_source(root)
             workflow = root / ".github" / "workflows" / "project-seed-sync.yml"
             workflow.write_text(
-                "for file in " + " ".join(SNAPSHOT_FILES[:-1]) + "; do\\n"
-                '  cp "seed/$file" "target/.project_seed/seed/$file"\\n'
-                "done\\n",
+                "for file in " + " ".join(SNAPSHOT_FILES[:-1]) + "; do\n"
+                '  cp "seed/$file" "target/.project_seed/seed/$file"\n'
+                "done\n",
                 encoding="utf-8",
             )
             self.assertTrue(any("WORKTREE_LIFECYCLE.md in its snapshot manifest" in p
