@@ -23,9 +23,11 @@ class VerifySeedBundleTests(unittest.TestCase):
         workflow = root / ".github" / "workflows" / "project-seed-sync.yml"
         workflow.parent.mkdir(parents=True)
         workflow.write_text(
+            '      - "SEED_SYNC.md"\n'
             "for file in " + " ".join(SNAPSHOT_FILES) + "; do\n"
             '  cp "seed/$file" "target/.project_seed/seed/$file"\n'
-            "done\n",
+            "done\n"
+            "cp seed/SEED_SYNC.md target/.project_seed/README.md\n",
             encoding="utf-8",
         )
 
@@ -92,6 +94,35 @@ class VerifySeedBundleTests(unittest.TestCase):
                 encoding="utf-8",
             )
             self.assertTrue(any("WORKTREE_LIFECYCLE.md in the snapshot-copy loop manifest" in p
+                                for p in check_source(root)))
+
+    def test_source_detects_missing_sync_policy_copy(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.make_source(root)
+            workflow = root / ".github" / "workflows" / "project-seed-sync.yml"
+            workflow.write_text(
+                '      - "SEED_SYNC.md"\\n'
+                + "for file in " + " ".join(SNAPSHOT_FILES) + "; do\\n"
+                + '  cp "seed/$file" "target/.project_seed/seed/$file"\\n'
+                + "done\\n",
+                encoding="utf-8",
+            )
+            self.assertTrue(any("does not copy SEED_SYNC.md" in p for p in check_source(root)))
+
+    def test_source_detects_missing_sync_policy_trigger(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.make_source(root)
+            workflow = root / ".github" / "workflows" / "project-seed-sync.yml"
+            workflow.write_text(
+                "for file in " + " ".join(SNAPSHOT_FILES) + "; do\\n"
+                + '  cp "seed/$file" "target/.project_seed/seed/$file"\\n'
+                + "done\\n"
+                + "cp seed/SEED_SYNC.md target/.project_seed/README.md\\n",
+                encoding="utf-8",
+            )
+            self.assertTrue(any("not triggered by changes to SEED_SYNC.md" in p
                                 for p in check_source(root)))
 
     def test_source_detects_removed_terminal_rule(self) -> None:
