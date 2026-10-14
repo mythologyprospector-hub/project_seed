@@ -46,7 +46,7 @@ class VerifySeedBundleTests(unittest.TestCase):
                 "done\n",
                 encoding="utf-8",
             )
-            self.assertTrue(any("README.md in its snapshot manifest" in p
+            self.assertTrue(any("WORKTREE_LIFECYCLE.md in its snapshot manifest" in p
                                 for p in check_source(root)))
 
     def test_source_detects_removed_terminal_rule(self) -> None:
