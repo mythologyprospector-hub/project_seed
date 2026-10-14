@@ -95,6 +95,10 @@ def check_source(root: Path) -> list[str]:
                 )
         if not found_copy:
             problems.append("Sync workflow does not copy manifest files into the reference snapshot")
+        if 'cp seed/SEED_SYNC.md target/.project_seed/README.md' not in workflow:
+            problems.append("Sync workflow does not copy SEED_SYNC.md into the target reference README")
+        if '"SEED_SYNC.md"' not in workflow:
+            problems.append("Sync workflow is not triggered by changes to SEED_SYNC.md")
     return problems
 
 
