@@ -49,6 +49,21 @@ class VerifySeedBundleTests(unittest.TestCase):
             self.assertTrue(any("WORKTREE_LIFECYCLE.md in its snapshot manifest" in p
                                 for p in check_source(root)))
 
+    def test_source_does_not_accept_similarly_named_manifest_entry(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.make_source(root)
+            workflow = root / ".github" / "workflows" / "project-seed-sync.yml"
+            workflow.write_text(
+                "for file in " + " ".join(SNAPSHOT_FILES[:-1])
+                + " WORKTREE_LIFECYCLE.md.backup; do\n"
+                + '  cp "seed/$file" "target/.project_seed/seed/$file"\n'
+                + "done\n",
+                encoding="utf-8",
+            )
+            self.assertTrue(any("WORKTREE_LIFECYCLE.md in its snapshot manifest" in p
+                                for p in check_source(root)))
+
     def test_source_detects_removed_terminal_rule(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -90,6 +105,15 @@ class VerifySeedBundleTests(unittest.TestCase):
             (target / "AGENTS.md").write_text("project instructions", encoding="utf-8")
             self.assertTrue(any("Seed reference snapshot is incomplete" in p
                                 for p in check_target(target)))
+
+    def test_synchronized_target_requires_active_root_instructions(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            target = Path(tmp)
+            snapshot = target / ".project_seed" / "seed"
+            snapshot.mkdir(parents=True)
+            for name in SNAPSHOT_FILES:
+                (snapshot / name).write_text("installed", encoding="utf-8")
+            self.assertTrue(any("no active root AGENTS.md" in p for p in check_target(target)))
 
 
 if __name__ == "__main__":
