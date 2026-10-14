@@ -1,6 +1,6 @@
 # Worktree Lifecycle
 
-**Status:** Proposed
+**Status:** Canonical
 **Governs:** How agents create, identify, track, preserve, and retire temporary Git worktrees; `AGENTS.md` remains the governing operating constitution.
 **Last verified:** 2026-10-13
 
