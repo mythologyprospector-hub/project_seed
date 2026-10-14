@@ -186,6 +186,18 @@ ChatGPT continues driving within the authorized mission
 
 Repeat the loop as needed. Do not make the human serve as the dispatcher between tools, carry project context manually, or repeatedly explain the same operating principle.
 
+### Context economy — keep the director light on its feet
+
+Miracle Tokens also means protecting the assistant's working context so it remains available for judgment, direction, and review.
+
+- Delegate bulk repository inspection, source tracing, implementation, and repeated test cycles to Codex or the most suitable available tool when that tool can do the work directly.
+- Ask implementation tools for compact, evidence-backed handoffs: what changed, where, why, which checks actually ran and passed or failed, what remains uncertain, and the recommended next move.
+- Do not flood the directing assistant with whole-file dumps, repeated unchanged context, or long transcripts when a focused finding or diff is enough. Retrieve the smallest relevant slice of durable project context needed for the decision at hand.
+- Keep the reasoning that determines mission, architecture, priorities, trade-offs, and acceptance with the directing assistant. Delegation saves context; it does not transfer accountability.
+- Record durable findings in the repository rather than relying on a long conversation to preserve them.
+
+Context economy must never become an excuse to skip inspection, conceal evidence, or accept a tool's claims without review. The aim is to spend attention where it has the greatest value—not merely to use fewer tokens.
+
 ### What this strategy is—and is not
 
 The goal is to use different tools for the work they are best suited to and avoid making one tool's allowance the single bottleneck. It can reduce avoidable context and usage pressure, but it does **not** abolish platform limits, guarantee unlimited work, or guarantee that every tool is available.
@@ -562,6 +574,19 @@ Rules:
 This is a presentation and operational-safety requirement, not a preference to remove syntax highlighting. **Full-size colorful Markdown code blocks are the required format for copy/paste terminal commands.**
 
 
+## Do not transfer coordination overhead to the owner
+
+The owner's role is to set the mission, supply judgment where it matters, and approve consequential decisions—not to operate the agent workflow.
+
+- Do not require the owner to author or maintain `work.yml`, task manifests, dispatch files, orchestration configuration, or implementation tickets merely to compensate for an agent's inability or unwillingness to plan and coordinate its own work.
+- Such files are appropriate when they are genuinely part of the product, the repository's established workflow, or an explicitly agreed deliverable. In that case, the assistant explains their purpose and takes responsibility for designing and maintaining them; it does not quietly turn the owner into the workflow engineer.
+- Do not introduce a new tool, workflow, branch strategy, worktree arrangement, or directory layout without considering the operational burden it places on the owner. Technical validity alone is not enough; the approach must fit the owner's established working model.
+- If a new workflow creates extra folders, branches, state, cleanup, or recovery steps, the assistant must plan and manage that lifecycle. Explain only the user actions that are genuinely necessary.
+- Prefer the simplest workflow that safely achieves the goal. Extra infrastructure is justified by a concrete benefit, not by novelty, convenience to the builder, or a desire to make the owner follow the builder's preferred process.
+- Before handing local commands to the owner, determine whether the work can be done through available tools. If a local action is truly required, give the smallest complete command sequence, explain why it is needed, and retain responsibility for interpreting the result and deciding what comes next.
+
+This rule does not prohibit sophisticated tools. It makes the assistant responsible for absorbing their complexity wherever possible instead of exporting that complexity to the owner.
+
 ## Workspace isolation and worktree hygiene
 
 The owner's everyday checkout is the stable project location declared by the owner (on Bucky, `~/projects/<repo>`). Keep that checkout predictable and do not turn it into a rotating pile of task branches or temporary workspaces.
@@ -574,6 +599,10 @@ The owner's everyday checkout is the stable project location declared by the own
 - Do not delete a worktree or its files merely to tidy up. Inspect for unique commits, uncommitted or untracked files, and useful evidence first; preserve anything uncertain until it is understood.
 - If worktrees have already spilled into the projects root, propose or perform a careful Git-aware relocation into the dedicated worktree home, preserving each worktree and its state. Do not reset, force-push, or rewrite branch history as a cleanup shortcut.
 - The assistant owns the coordination and cleanup plan. Do not make the human manually manage branches, run routine tests, or arbitrate ordinary workspace housekeeping.
+
+### Worktree tracking is mandatory
+
+The hygiene rules above are not optional. At the start of local repository work and before handoff, inspect registered worktrees and reconcile them with the physical worktree directory. Every worktree must have a known purpose, a durable task reference, a current disposition, and an explicit retirement condition. When that information is not already unambiguously recorded in an issue/PR, maintain a repository-root `WORKTREES.md` while worktrees are active. Follow [`WORKTREE_LIFECYCLE.md`](WORKTREE_LIFECYCLE.md) for the inventory fields, preservation checks, and retirement procedure. Do not rely on conversation memory to discover or explain worktrees.
 
 ## Verification ownership
 
