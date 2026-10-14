@@ -11,8 +11,6 @@ on:
       - "ORGANS.md"
       - "README.md"
       - "WORKTREE_LIFECYCLE.md"
-      - "SEED_SYNC.md"
-      - ".github/workflows/project-seed-sync.yml"
   workflow_dispatch:
 
 permissions:
