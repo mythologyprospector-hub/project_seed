@@ -102,10 +102,10 @@ class VerifySeedBundleTests(unittest.TestCase):
             self.make_source(root)
             workflow = root / ".github" / "workflows" / "project-seed-sync.yml"
             workflow.write_text(
-                '      - "SEED_SYNC.md"\\n'
-                + "for file in " + " ".join(SNAPSHOT_FILES) + "; do\\n"
-                + '  cp "seed/$file" "target/.project_seed/seed/$file"\\n'
-                + "done\\n",
+                '      - "SEED_SYNC.md"\n'
+                + "for file in " + " ".join(SNAPSHOT_FILES) + "; do\n"
+                + '  cp "seed/$file" "target/.project_seed/seed/$file"\n'
+                + "done\n",
                 encoding="utf-8",
             )
             self.assertTrue(any("does not copy SEED_SYNC.md" in p for p in check_source(root)))
@@ -116,10 +116,10 @@ class VerifySeedBundleTests(unittest.TestCase):
             self.make_source(root)
             workflow = root / ".github" / "workflows" / "project-seed-sync.yml"
             workflow.write_text(
-                "for file in " + " ".join(SNAPSHOT_FILES) + "; do\\n"
-                + '  cp "seed/$file" "target/.project_seed/seed/$file"\\n'
-                + "done\\n"
-                + "cp seed/SEED_SYNC.md target/.project_seed/README.md\\n",
+                "for file in " + " ".join(SNAPSHOT_FILES) + "; do\n"
+                + '  cp "seed/$file" "target/.project_seed/seed/$file"\n'
+                + "done\n"
+                + "cp seed/SEED_SYNC.md target/.project_seed/README.md\n",
                 encoding="utf-8",
             )
             self.assertTrue(any("not triggered by changes to SEED_SYNC.md" in p
