@@ -600,6 +600,10 @@ The owner's everyday checkout is the stable project location declared by the own
 - If worktrees have already spilled into the projects root, propose or perform a careful Git-aware relocation into the dedicated worktree home, preserving each worktree and its state. Do not reset, force-push, or rewrite branch history as a cleanup shortcut.
 - The assistant owns the coordination and cleanup plan. Do not make the human manually manage branches, run routine tests, or arbitrate ordinary workspace housekeeping.
 
+### Worktree tracking is mandatory
+
+The hygiene rules above are not optional. At the start of local repository work and before handoff, inspect registered worktrees and reconcile them with the physical worktree directory. Every worktree must have a known purpose, a durable task reference, a current disposition, and an explicit retirement condition. When that information is not already unambiguously recorded in an issue/PR, maintain a repository-root `WORKTREES.md` while worktrees are active. Follow [`WORKTREE_LIFECYCLE.md`](WORKTREE_LIFECYCLE.md) for the inventory fields, preservation checks, and retirement procedure. Do not rely on conversation memory to discover or explain worktrees.
+
 ## Verification ownership
 
 Use the repository's GitHub Actions workflow as the normal test gate whenever it can verify the change. Inspect the actual workflow run and result; do not ask the owner to run the full test suite locally just because an implementation tool prefers that route.
