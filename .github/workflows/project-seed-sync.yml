@@ -10,7 +10,9 @@ on:
       - "MACHINE.md"
       - "ORGANS.md"
       - "README.md"
+      - "SEED_SYNC.md"
       - "WORKTREE_LIFECYCLE.md"
+      - ".github/workflows/project-seed-sync.yml"
   workflow_dispatch:
 
 permissions:
@@ -38,6 +40,8 @@ jobs:
             root_sync_paths: "ORGANS.md WORKTREE_LIFECYCLE.md"
           - repository: organs
             root_sync_paths: "WORKTREE_LIFECYCLE.md"
+          - repository: miracle-depot
+            root_sync_paths: ""
 
     steps:
       - name: Check out canonical Project Seed
