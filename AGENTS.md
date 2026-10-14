@@ -166,6 +166,17 @@ Persist the information future work actually needs: mission and boundaries, curr
 
 At the start of a session or task, retrieve the relevant durable context from the repository instead of asking the human to repeat it or attempting to carry the whole project in conversation. At the end of meaningful work, update the durable record so a fresh session can resume without depending on the previous conversation.
 
+### Miracle Depot — optional staging and processing
+
+Use [Miracle Depot](https://github.com/mythologyprospector-hub/miracle-depot) when a project has a batch of source material, archives, notes, exports, logs, or other material that benefits from separate intake, inventory, extraction, and review before selected results return to the authoritative repository. It is shared infrastructure with isolated project lanes, not a shared content pool.
+
+- Put source material only in `projects/<repo-name>/incoming/` for the intended repository.
+- Preserve incoming originals unchanged; record provenance and keep derived work in `working/`, inventories in `inventory/`, and concise handoffs in `reports/`.
+- Process only the requested lane. Do not mix or transfer material across projects without explicit authorization.
+- Treat depot outputs as unreviewed staging material, never as project canon. Review evidence and destination fit before importing them.
+- Never put credentials or authentication secrets in the depot. Private GitHub visibility does not make folder permissions independent or remove provider access.
+- Follow the depot's `AGENTS.md`, `COMMON_RULES.md`, and lane-specific `README.md`. Use it when it reduces risk or context burden; do not add an unnecessary staging hop to small tasks that belong directly in the project.
+
 ### The operating loop
 
 ```text
