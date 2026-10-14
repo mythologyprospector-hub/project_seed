@@ -23,6 +23,18 @@ README.md
 
 `AGENTS.md` is the entry-point operating constitution, but it relies on the supporting references. The complete bundle preserves the owner's working relationship and Genie Principle (`HUMAN.md`), machine constants (`MACHINE.md`), documentation rules (`DOCS.md`), and Organs integration contract (`ORGANS.md`). Do not install only `AGENTS.md` and assume the full operating model is present.
 
+### Verify an installation
+
+Run the structural verifier from the Project Seed checkout:
+
+```bash
+python3 scripts/verify_seed_bundle.py --target /path/to/target-repository
+```
+
+It checks for the six root bundle files in a fresh installation, or the complete reference snapshot and active `AGENTS.md` in a repository that receives synchronized Seed snapshots. GitHub Actions also checks that this repository's bundle and propagation manifest remain structurally consistent.
+
+**Limit:** this verifies file presence and wiring, not whether an assistant follows the instructions or whether project-specific adaptation is correct. Those still require review and real-world observation.
+
 ## What does not belong here
 
 Do not put these in the universal seed:
