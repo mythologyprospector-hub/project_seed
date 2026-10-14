@@ -11,6 +11,7 @@ on:
       - "ORGANS.md"
       - "README.md"
       - "WORKTREE_LIFECYCLE.md"
+      - "SEED_SYNC.md"
   workflow_dispatch:
 
 permissions:
