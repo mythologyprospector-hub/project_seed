@@ -63,9 +63,10 @@ def check_source(root: Path) -> list[str]:
             except ValueError:
                 problems.append("Could not parse the sync workflow snapshot manifest")
         for name in SNAPSHOT_FILES:
-            literal_copy = f'cp "seed/{name}" "target/.project_seed/seed/{name}"'
-            if literal_copy not in workflow and name not in manifest_files:
+            if name not in manifest_files:
                 problems.append(f"Sync workflow does not include {name} in its snapshot manifest")
+        if 'cp "seed/$file" "target/.project_seed/seed/$file"' not in workflow:
+            problems.append("Sync workflow does not copy manifest files into the reference snapshot")
     return problems
 
 
