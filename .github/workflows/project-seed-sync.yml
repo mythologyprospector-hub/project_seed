@@ -1,0 +1,98 @@
+name: Propagate Project Seed updates
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "AGENTS.md"
+      - "DOCS.md"
+      - "HUMAN.md"
+      - "MACHINE.md"
+      - "ORGANS.md"
+      - "README.md"
+      - "WORKTREE_LIFECYCLE.md"
+      - "SEED_SYNC.md"
+      - ".github/workflows/project-seed-sync.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: project-seed-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: Prepare update for ${{ matrix.repository }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - repository: wonderweave
+            root_sync_paths: "DOCS.md MACHINE.md WORKTREE_LIFECYCLE.md"
+          - repository: episteme
+            root_sync_paths: "ORGANS.md WORKTREE_LIFECYCLE.md"
+          - repository: renaissance
+            root_sync_paths: "ORGANS.md WORKTREE_LIFECYCLE.md"
+          - repository: praxis
+            root_sync_paths: "ORGANS.md WORKTREE_LIFECYCLE.md"
+          - repository: organs
+            root_sync_paths: "WORKTREE_LIFECYCLE.md"
+
+    steps:
+      - name: Check out canonical Project Seed
+        uses: actions/checkout@v4
+        with:
+          path: seed
+          ref: ${{ github.sha }}
+
+      - name: Check out target repository
+        uses: actions/checkout@v4
+        with:
+          repository: mythologyprospector-hub/${{ matrix.repository }}
+          ref: main
+          token: ${{ secrets.PROJECT_SEED_SYNC_TOKEN }}
+          path: target
+
+      - name: Update reference snapshot and approved shared files
+        env:
+          ROOT_SYNC_PATHS: ${{ matrix.root_sync_paths }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # Deliver the complete upstream operating bundle as a reference snapshot.
+          # The target's active AGENTS.md is deliberately never overwritten.
+          mkdir -p target/.project_seed/seed
+          for file in AGENTS.md DOCS.md HUMAN.md MACHINE.md ORGANS.md README.md WORKTREE_LIFECYCLE.md; do
+            cp "seed/$file" "target/.project_seed/seed/$file"
+          done
+          cp seed/SEED_SYNC.md target/.project_seed/README.md
+
+          # These root-level copies are explicitly approved shared-file mappings.
+          # They are proposed through a PR, never merged directly to main.
+          for file in $ROOT_SYNC_PATHS; do
+            cp "seed/$file" "target/$file"
+          done
+
+      - name: Open or update synchronization pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.PROJECT_SEED_SYNC_TOKEN }}
+          path: target
+          branch: chore/project-seed-sync
+          delete-branch: true
+          title: "chore: sync Project Seed updates"
+          commit-message: "chore: sync Project Seed reference and shared files"
+          body: |
+            Automated update from [canonical Project Seed](https://github.com/mythologyprospector-hub/project_seed).
+
+            This PR refreshes the upstream reference snapshot in `.project_seed/seed/` and updates only the shared root files listed by the synchronization policy.
+
+            **Review requirements**
+            - Do not replace this repository's active `AGENTS.md` with the upstream reference.
+            - Review `.project_seed/seed/AGENTS.md` and adapt relevant universal changes into `AGENTS.md` while preserving this project's own canon, safety rules, and onboarding.
+            - Check all changes and required GitHub Actions before merging.
+            - This workflow does not merge PRs automatically.
