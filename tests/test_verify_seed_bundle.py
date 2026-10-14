@@ -64,6 +64,19 @@ class VerifySeedBundleTests(unittest.TestCase):
             self.assertTrue(any("WORKTREE_LIFECYCLE.md in its snapshot manifest" in p
                                 for p in check_source(root)))
 
+    def test_source_detects_missing_snapshot_copy_operation(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.make_source(root)
+            workflow = root / ".github" / "workflows" / "project-seed-sync.yml"
+            workflow.write_text(
+                "for file in " + " ".join(SNAPSHOT_FILES) + "; do\n"
+                '  echo "seed/$file"\n'
+                "done\n",
+                encoding="utf-8",
+            )
+            self.assertTrue(any("does not copy manifest files" in p for p in check_source(root)))
+
     def test_source_detects_removed_terminal_rule(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
