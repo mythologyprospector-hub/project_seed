@@ -7,6 +7,7 @@ will follow instructions, nor that project-specific AGENTS.md was adapted well.
 from __future__ import annotations
 
 import argparse
+import shlex
 import sys
 from pathlib import Path
 
@@ -51,14 +52,20 @@ def check_source(root: Path) -> list[str]:
         problems.append("Missing .github/workflows/project-seed-sync.yml")
     else:
         workflow = workflow_path.read_text(encoding="utf-8")
+        manifest_files: set[str] = set()
+        for line in workflow.splitlines():
+            stripped = line.strip()
+            if not stripped.startswith("for file in "):
+                continue
+            manifest = stripped[len("for file in "):].split(";", 1)[0].strip()
+            try:
+                manifest_files.update(shlex.split(manifest))
+            except ValueError:
+                problems.append("Could not parse the sync workflow snapshot manifest")
         for name in SNAPSHOT_FILES:
-            if f'cp "seed/{name}" "target/.project_seed/seed/{name}"' not in workflow:
-                # The workflow uses a loop for the copy, so confirm the manifest
-                # loop includes each expected file instead of expecting a literal cp.
-                loop_start = 'for file in '
-                loop_lines = [line for line in workflow.splitlines() if line.strip().startswith(loop_start)]
-                if not loop_lines or not any(name in line for line in loop_lines):
-                    problems.append(f"Sync workflow does not include {name} in its snapshot manifest")
+            literal_copy = f'cp "seed/{name}" "target/.project_seed/seed/{name}"'
+            if literal_copy not in workflow and name not in manifest_files:
+                problems.append(f"Sync workflow does not include {name} in its snapshot manifest")
     return problems
 
 
