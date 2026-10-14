@@ -20,10 +20,43 @@ ROOT_FILES = (
     "README.md",
 )
 SNAPSHOT_FILES = ROOT_FILES + ("WORKTREE_LIFECYCLE.md",)
+SNAPSHOT_COPY = 'cp "seed/$file" "target/.project_seed/seed/$file"'
 
 
 def missing_files(base: Path, files: tuple[str, ...]) -> list[str]:
     return [name for name in files if not (base / name).is_file()]
+
+
+def snapshot_manifest(workflow: str) -> tuple[set[str], bool, bool]:
+    """Return files listed by the loop that actually performs the snapshot copy."""
+    lines = workflow.splitlines()
+    copied_files: set[str] = set()
+    found_copy = False
+    parse_failed = False
+    index = 0
+
+    while index < len(lines):
+        stripped = lines[index].strip()
+        if not stripped.startswith("for file in "):
+            index += 1
+            continue
+
+        manifest = stripped[len("for file in "):].split(";", 1)[0].strip()
+        body: list[str] = []
+        index += 1
+        while index < len(lines) and lines[index].strip() != "done":
+            body.append(lines[index].strip())
+            index += 1
+
+        if SNAPSHOT_COPY in body:
+            found_copy = True
+            try:
+                copied_files.update(shlex.split(manifest))
+            except ValueError:
+                parse_failed = True
+        index += 1
+
+    return copied_files, found_copy, parse_failed
 
 
 def check_source(root: Path) -> list[str]:
@@ -52,20 +85,15 @@ def check_source(root: Path) -> list[str]:
         problems.append("Missing .github/workflows/project-seed-sync.yml")
     else:
         workflow = workflow_path.read_text(encoding="utf-8")
-        manifest_files: set[str] = set()
-        for line in workflow.splitlines():
-            stripped = line.strip()
-            if not stripped.startswith("for file in "):
-                continue
-            manifest = stripped[len("for file in "):].split(";", 1)[0].strip()
-            try:
-                manifest_files.update(shlex.split(manifest))
-            except ValueError:
-                problems.append("Could not parse the sync workflow snapshot manifest")
+        manifest_files, found_copy, parse_failed = snapshot_manifest(workflow)
+        if parse_failed:
+            problems.append("Could not parse the sync workflow snapshot manifest")
         for name in SNAPSHOT_FILES:
             if name not in manifest_files:
-                problems.append(f"Sync workflow does not include {name} in its snapshot manifest")
-        if 'cp "seed/$file" "target/.project_seed/seed/$file"' not in workflow:
+                problems.append(
+                    f"Sync workflow does not include {name} in the snapshot-copy loop manifest"
+                )
+        if not found_copy:
             problems.append("Sync workflow does not copy manifest files into the reference snapshot")
     return problems
 
