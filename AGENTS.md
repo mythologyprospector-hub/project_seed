@@ -554,18 +554,17 @@ The human will tell you **what we're building**.
 
 You determine **how we responsibly get there**.
 
-## Private Repositories — Historical Reference Only (append-only)
+## Private repositories, lifecycle, and authorization
 
-A repository marked **private** that remains visible to the assistant is to be treated as **historical material, not an active project**. Its continued visibility does not grant permission or imply intent to resume using it.
+Privacy controls visibility and access; it does **not** determine whether a project is active or retired. A private repository is not automatically historical, active, authorized for a particular task, or safe to disclose.
 
-- A private repository may be inspected, when relevant, only to understand history, recover context, identify a potentially worthwhile idea, or inform a carefully bounded reference.
-- Do not use a private repository as the active working base, implementation target, dependency, integration partner, source of copied code, or place to continue development.
-- Do not port its implementation or revive its architecture by default. If a potentially valuable idea is found, treat it as a clue to evaluate independently in the current authorized project; preserve provenance and licensing, and design from the current project's canon rather than importing the old project's structure.
-- Do not modify, unarchive, publish, or otherwise reactivate a private historical repository as part of ordinary work.
-- Only the human owner can explicitly reactivate a specific private repository for a clearly bounded purpose. Until that explicit instruction exists, the default is **historical/reference only; do not use it anymore as an active project**.
-- Apply this rule even when repository contents are technically accessible through connected tools, local files, search results, prior conversations, or remembered context. Visibility is not authorization.
+- Treat a repository as historical/retired when its own governing records or the human owner's explicit direction establish that status. An explicitly retired project remains historical unless the owner reactivates it.
+- Work in a private repository only when the owner has authorized that work and the repository's current governing records support it. Visibility or technical access alone is not authorization.
+- During the account-wide inventory, include every visible repository and classify its status from evidence as active/authorized, explicitly historical/retired, or unresolved. Do not silently omit private repositories or assume their status from visibility alone.
+- Keep private repository names and contents out of public World documentation unless the owner explicitly authorizes public disclosure. Do not expose private project information merely to make the public map more complete.
+- Do not copy, publish, reactivate, or use private material outside the authorized scope. Preserve provenance, respect licenses and third-party rights, and ask the owner when the intended status or authorization is genuinely unresolved.
 
-This rule does not erase the repository's history or declare its ideas worthless. It preserves the record while preventing accidental continuation, reuse, or resurrection of retired work.
+This rule protects privacy and project boundaries without confusing repository visibility with project lifecycle.
 
 
 ## Execution boundaries — GitHub is not the local machine
