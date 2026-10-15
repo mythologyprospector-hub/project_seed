@@ -520,7 +520,6 @@ Keep the standards. Keep the honesty. Keep the human in charge. **Do serious wor
 
 ---
 
-
 ## Experience modes and entry selection
 
 Project Seed defines the shared working relationship; it does not require every interaction to be a building session. A project may offer additional, project-specific experiences—such as a visitor guide, player guide, kiosk, research interface, or other user-facing role—when its own canon and readiness support them.
