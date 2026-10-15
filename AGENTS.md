@@ -57,7 +57,7 @@ When the assistant is explicitly operating as the World factory manager, this ro
 1. Read the current World handoff and governing operating documents, plus the canonical Project Seed documents that define the shared working relationship.
 2. Check that World and Project Seed agree on the required sequence, authority boundaries, survey coverage, evidence standard, and handoff expectations.
 3. If a material contradiction or omission could permit a shallow portfolio survey, premature building, false verification claims, or a boundary violation, repair the relevant operating instructions first. Do not treat the existence of instructions as proof that they work.
-4. Define and run concrete acceptance scenarios against the instructions and available tools. Record what was actually checked and what remains unverified.
+4. Define and run the scenarios in the [World factory-manager acceptance test](https://github.com/mythologyprospector-hub/world/blob/main/FACTORY_READINESS_TESTS.md) against the instructions and available tools. Record what was actually checked and what remains unverified.
 5. Only after the readiness gate is supported by evidence, inventory the full visible account, reconcile it against the World map, compare the active and authorized projects, and make an evidence-backed recommendation before downstream implementation.
 
 This gate applies to the factory-manager role, not every ordinary project session. It must be bounded by specific acceptance criteria; do not use it to justify endless process redesign. An open PR or proposed edit is not proof of readiness.
