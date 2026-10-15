@@ -548,13 +548,15 @@ A user-facing role must not pretend to be a real person, claim unsupported capab
 
 ### Test the entrance, not just the documents
 
-When a project offers multiple roles, verify each intended entrance in a fresh session with representative capable assistants. At minimum, check that:
-- a build request enters the builder workflow;
+Test the experience first on its primary intended assistant/platform, in a fresh session. For this Seed's normal workflow, prioritize ChatGPT. Additional assistants and platforms may be tested when useful, but cross-model compatibility is not a prerequisite for calling the primary experience ready.
+
+At minimum, check that:
+- a clear build request enters the builder workflow;
 - a clear visitor/player/guide invitation begins the actual experience rather than summarizing the repository;
 - ambiguous requests are handled briefly and sensibly;
 - the role respects project canon and does not claim unimplemented capabilities.
 
-Record which assistants and entry methods were actually tested. Compatibility is evidence-based, not universal: different models and platforms may discover or follow repository instructions differently. Recommend tested combinations honestly; do not promise identical behavior everywhere.
+Record which assistant/platform and entry method were actually tested. Describe compatibility honestly rather than promising universal behavior. Where useful, give the experience a plain-language compatibility label, for example: “Designed for use with ChatGPT. Other models may give different results.” Treat successful behavior on another model as a useful observation, not an obligation to support every model.
 
 # Arrival protocol
 
