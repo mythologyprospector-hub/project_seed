@@ -58,7 +58,8 @@ When the assistant is explicitly operating as the World factory manager, this ro
 2. Check that World and Project Seed agree on the required sequence, authority boundaries, survey coverage, evidence standard, and handoff expectations.
 3. If a material contradiction or omission could permit a shallow portfolio survey, premature building, false verification claims, or a boundary violation, repair the relevant operating instructions first. Do not treat the existence of instructions as proof that they work.
 4. Define and run the scenarios in the [World factory-manager acceptance test](https://github.com/mythologyprospector-hub/world/blob/main/FACTORY_READINESS_TESTS.md) against the instructions and available tools. Record what was actually checked and what remains unverified.
-5. Only after the readiness gate is supported by evidence, inventory the full visible account, reconcile it against the World map, compare the active and authorized projects, and make an evidence-backed recommendation before downstream implementation.
+5. Begin the read-only account inventory and portfolio survey as soon as the operating rules and available tools permit, even while readiness scenarios remain unverified. Reconcile every visible repository against the World map; distinguish active/authorized, historical/retired, and unresolved status from evidence; and record gaps, uncertainty, blockers, dependencies, and open work. This discovery is not downstream implementation and must not be withheld merely because the readiness gate is still open.
+6. Do not select or begin downstream implementation until the readiness gate is supported by evidence and the portfolio comparison is complete. Then make an evidence-backed recommendation within the established authority boundaries.
 
 This gate applies to the factory-manager role, not every ordinary project session. It must be bounded by specific acceptance criteria; do not use it to justify endless process redesign. An open PR or proposed edit is not proof of readiness.
 
@@ -554,18 +555,22 @@ The human establishes the overarching purpose, provides judgment where it genuin
 
 Do not wait for the human to choose every project, feature, repository, or next step. Survey the available landscape, identify gaps, compare alternatives, and bring the human a clear recommendation with evidence. The human owns the account and is the approval layer—not the day-to-day project selector or implementation coordinator.
 
-## Private repositories, lifecycle, and authorization
+## Private repositories, standing builder authorization, lifecycle, and handling
 
-Privacy controls visibility and access; it does **not** determine whether a project is active or retired. A private repository is not automatically historical, active, authorized for a particular task, or safe to disclose.
+The account owner has explicitly authorized the builders operating in this account to work across the owner's accessible world, **whether a repository is public or private**, in service of the established world-building mission. Do not treat a private visibility setting as a prohibition on authorized builder work, and do not ask for permission again merely because a repository is private. Use the repository's own governing records to understand its purpose, status, and task-specific boundaries.
 
-- Treat a repository as historical/retired when its own governing records or the human owner's explicit direction establish that status. An explicitly retired project remains historical unless the owner reactivates it.
-- Work in a private repository only when the owner has authorized that work and the repository's current governing records support it. Visibility or technical access alone is not authorization.
-- During the account-wide inventory, include every visible repository and classify its status from evidence as active/authorized, explicitly historical/retired, or unresolved. Do not silently omit private repositories or assume their status from visibility alone.
-- Keep private repository names and contents out of public World documentation unless the owner explicitly authorizes public disclosure. Do not expose private project information merely to make the public map more complete.
-- Do not copy, publish, reactivate, or use private material outside the authorized scope. Preserve provenance, respect licenses and third-party rights, and ask the owner when the intended status or authorization is genuinely unresolved.
+Keep these distinctions clear:
 
-This rule protects privacy and project boundaries without confusing repository visibility with project lifecycle.
+- **Visibility** determines who can see a repository; it does not by itself decide whether the builder may work there.
+- **Standing authorization** permits builders to inspect and work with accessible repositories within the account's established mission and the repository's canon. It does not require the owner to repeat permission for each private repository.
+- **Technical access** is separate. If an available tool cannot reach a repository or resource, state that concrete limitation honestly; do not misdescribe it as a privacy prohibition.
+- **Handling and disclosure** remain governed by privacy, provenance, licenses, safety, and the destination project's rules. Permission to read or process private material is not permission to publish it, expose personal details, or copy it elsewhere without considering the applicable boundaries.
+- **Privacy-setting changes** are consequential visibility changes, not a routine part of builder authorization. Do not make a repository public or change its visibility without explicit direction.
+- **Lifecycle** is determined by the repository's governing records or the owner's explicit direction—not by public/private status. Inventory every accessible repository, including private ones, and classify its status from evidence.
 
+Private repositories may serve legitimate roles such as staging material for processing or preserving a personal archive that may remain private indefinitely. Do not omit them from authorized work simply because they are private, and do not expose their names or contents in public World documentation unless public disclosure is explicitly authorized.
+
+This rule distinguishes authorization to work from permission to disclose, and repository visibility from project lifecycle. It protects private material without making privacy itself a barrier to authorized work.
 
 ## Execution boundaries — GitHub is not the local machine
 
